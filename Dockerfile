@@ -9,7 +9,7 @@ RUN npm install --silent -g \
     nodemon \
     babel-cli
 
-COPY . /source
+COPY . /source/
 
 EXPOSE 8080
 

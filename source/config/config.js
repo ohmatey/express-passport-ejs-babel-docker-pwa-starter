@@ -4,12 +4,12 @@ const rootPath = path.normalize(__dirname + '/../../');
 module.exports = {
     development: {
         rootPath: rootPath,
-        db: 'mongodb://localhost/multivision',
+        db: 'mongodb://localhost:27017/platform',
         port: process.env.PORT || 8080
     },
     production: {
         rootPath: rootPath,
-        db: 'mongodb://<dbuser>:<dbpassword>@ds011872.mlab.com:11872/multivision',
-        port: process.env.PORT || 80
+        db: 'mongodb://localhost:27017/platform',
+        port: process.env.PORT || 27017
     }
 };

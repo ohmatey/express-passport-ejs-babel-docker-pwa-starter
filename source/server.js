@@ -5,6 +5,7 @@ import express from 'express'
 import config from './config/config'
 import routes from './routes/routes'
 import mongooseConfig from './config/mongoose'
+import bodyParser from 'body-parser'
 
 
 const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -30,7 +31,11 @@ const envConfig = config[env];
 // }else{
     const app = express();
 
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+
     mongooseConfig(envConfig);
+
 
     app.get('/', function (req, res) {
         res.status(200).send('Hello World!');
