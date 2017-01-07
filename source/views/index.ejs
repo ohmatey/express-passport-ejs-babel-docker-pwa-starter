@@ -1,0 +1,69 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#fffff">
+
+        <meta name="msapplication-TileColor" content="#fffff">
+        <meta name="msapplication-TileImage" content="./images/icons/mstile-150x150.png">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Progressive Web Application">
+        <meta name="application-name" content="Progressive Web Application">
+        <link rel="apple-touch-icon" href="/dist/icons/apple-touch-icon.png">
+
+        <link rel="manifest" href="/dist/manifest.json">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700">
+
+        <link rel="icon" type="image/png" href="/dist/icons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/dist/icons/favicon-16x16.png" sizes="16x16">
+
+        <title>Home Platform</title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/dist/styles.css">
+    </head>
+    <body>
+
+        <div class="loader">
+            <svg viewBox="0 0 32 32" width="32" height="32">
+                <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+            </svg>
+        </div>
+
+        <div class="container">
+
+            <div class="jumbotron text-center">
+                <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+
+                <p>Login or Register with:</p>
+                
+                <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+                <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+                <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+
+                <a href="/logout" class="btn btn-default"><span class="fa fa-user"></span> Local logout</a>
+
+                Logged In: <%= authenticated %>
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register('/dist/serviceWorker.js', { scope: "/dist/" })
+                    .then(function (registration) {
+                        console.info('Service worker is registered!');
+                    })
+                    .catch(function (error) {
+                        console.error('Service worker failed ', error);
+                    });
+            }
+        </script>
+    </body>
+</html>
