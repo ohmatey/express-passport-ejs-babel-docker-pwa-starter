@@ -5,18 +5,22 @@ import morgan from 'morgan'
 import session from 'express-session'
 import passport from 'passport'
 import flash from 'connect-flash'
+import cors from 'cors'
 
 import mongooseConfig from './config/mongoose'
 import routes from './routes/routes'
 import passportAuth from './config/passport'
+import io from './config/io'
 
-const app = express();
+
 
 const startApp = (envConfig) => {
+    const app = express();
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.use(morgan('combined'));
+    app.use(cors());
     app.use('/dist', express.static(__dirname + '/../dist/'));
 
     app.set('view engine', 'ejs');
@@ -29,8 +33,11 @@ const startApp = (envConfig) => {
     mongooseConfig(envConfig);
     passportAuth(passport);
 
+    const server = app.listen(envConfig.port);
+    io(server);
+
     app.use('/', routes);
-    app.listen(envConfig.port);
+    
     console.log('Application running!', envConfig.port);
 
     return app

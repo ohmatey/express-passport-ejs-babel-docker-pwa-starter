@@ -6,26 +6,21 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
+ * @providesModule ReactWithAddonsUMDEntry
  */
 
 'use strict';
 
 var _assign = require('object-assign');
 
+var ReactDOM = require('./ReactDOM');
+var ReactDOMServer = require('./ReactDOMServer');
 var ReactWithAddons = require('./ReactWithAddons');
 
-// `version` will be added here by the React module.
+// `version` will be added here by ReactIsomorphic.
 var ReactWithAddonsUMDEntry = _assign({
-  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {
-    ReactCurrentOwner: require('./ReactCurrentOwner')
-  }
+  __SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: ReactDOM,
+  __SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: ReactDOMServer
 }, ReactWithAddons);
-
-if (process.env.NODE_ENV !== 'production') {
-  _assign(ReactWithAddonsUMDEntry.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED, {
-    // ReactComponentTreeHook should not be included in production.
-    ReactComponentTreeHook: require('./ReactComponentTreeHook')
-  });
-}
 
 module.exports = ReactWithAddonsUMDEntry;

@@ -36,23 +36,9 @@
             </svg>
         </div>
 
-        <div class="container">
-
-            <div class="jumbotron text-center">
-                <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
-                <p>Login or Register with:</p>
-                
-                <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-                <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-                <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-
-                <a href="/logout" class="btn btn-default"><span class="fa fa-user"></span> Local logout</a>
-
-                Logged In: <%= authenticated %>
-            </div>
-
-        </div>
+        <div id="main"><%- markup -%></div>
+        
+        <!--- <script src="/dist/bundle.js"></script> --->
 
         <script type="text/javascript">
             if ("serviceWorker" in navigator) {
@@ -64,6 +50,15 @@
                         console.error('Service worker failed ', error);
                     });
             }
+        </script>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://localhost:8080');
+            socket.on('news', function (data) {
+                console.log(data);
+                socket.emit('a1', { my: 'data' });
+            });
         </script>
     </body>
 </html>
