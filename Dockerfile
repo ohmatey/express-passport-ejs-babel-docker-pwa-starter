@@ -4,10 +4,13 @@ RUN mkdir -p /source/
 WORKDIR /source/
 
 COPY package.json /source/
-RUN npm install
-RUN npm install --silent -g \
+
+RUN yarn gloabl add \
     nodemon \
-    babel-cli
+    babel-cli \
+    yarn
+
+RUN yarn
 
 COPY . /source/
 
